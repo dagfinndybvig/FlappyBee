@@ -15,6 +15,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.controllers.Controller;
+import com.badlogic.gdx.controllers.Controllers;
+
 
 /**
  * Created by James on 20/03/2015.
@@ -40,6 +43,10 @@ public class StartScreen extends ScreenAdapter {
     @Override
     public void show() {
         super.show();
+        //************ CONTROLLER
+        for (Controller c : Controllers.getControllers()) {
+            System.out.println(c.getName());
+        }
         stage = new Stage(new FitViewport(WORLD_WIDTH, WORLD_HEIGHT));
         Gdx.input.setInputProcessor(stage);
 
@@ -75,6 +82,8 @@ public class StartScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
+        //////CONTROL
+            if (Controllers.getControllers().get(0).getButton(0)) {game.setScreen(new LoadingScreen(game)); dispose();}
         super.render(delta);
         clearScreen();
         stage.act(delta);
@@ -89,6 +98,7 @@ public class StartScreen extends ScreenAdapter {
         playTexture.dispose();
         playPressTexture.dispose();
         titleTexture.dispose();
+        System.out.println("Bye StartScreen!");
     }
 
     private void clearScreen() {

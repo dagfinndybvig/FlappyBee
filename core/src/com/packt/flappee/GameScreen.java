@@ -13,9 +13,8 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.badlogic.gdx.controllers.Controller;
-import com.badlogic.gdx.controllers.ControllerListener;
 import com.badlogic.gdx.controllers.Controllers;
-import com.badlogic.gdx.controllers.PovDirection;
+
 
 /**
  * Created by James on 17/03/2015.
@@ -101,10 +100,6 @@ public class GameScreen extends ScreenAdapter {
         flappee.setPosition(WORLD_WIDTH / 4, WORLD_HEIGHT / 2);
         flowers.clear();
         score = 0;
-        //************ CONTROLLER
-        for (Controller c : Controllers.getControllers()) {
-            System.out.println(c.getName());
-        }
     }
 
     private boolean checkForCollision() {
@@ -118,7 +113,7 @@ public class GameScreen extends ScreenAdapter {
 
     private void updateFlappee(float delta) {
         flappee.update(delta);
-        //if (Gdx.input.isKeyPressed(Input.Keys.SPACE) || Gdx.input.isButtonPressed(Input.Buttons.LEFT)) flappee.flyUp();
+        if (Gdx.input.isKeyPressed(Input.Keys.SPACE) || Gdx.input.isButtonPressed(Input.Buttons.LEFT)) flappee.flyUp();
         if (Controllers.getControllers().get(0).getButton(0)) flappee.flyUp();
         blockFlappeeLeavingTheWorld();
     }
